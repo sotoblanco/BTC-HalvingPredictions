@@ -211,3 +211,12 @@ ggplotly(p)
 ```
 
 The results for the average return suggest a decreasing trend in the daily and monthly returns of BTC with a decrease on the volatility, by extrapolating these results we expect a decrease in the returns before the next halving and also a decrease in volatility which it is expected to occur closer to the halving. 
+
+
+Github: https://github.com/sotoblanco/BTC-HalvingPredictions
+
+
+Email: sotoblanco263542@gmail.com
+
+
+Twitter: @PastorSotoB1
