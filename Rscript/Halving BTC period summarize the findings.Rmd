@@ -1,7 +1,7 @@
 ---
 title: "Halving BTC Period summarize the findings"
 author: "Pastor Soto"
-date: "10/21/2021"
+date: "10/25/2021"
 output: 
   html_document: 
     code_folding: hide
@@ -13,6 +13,9 @@ library(tidyverse)
 library(plotly)
 library(lubridate)
 library(tidyquant)
+library(dygraphs)
+library(htmlwidgets)
+
 
 options(scipen = 999) # use integer instead of scientific notation
 ```
@@ -213,10 +216,38 @@ ggplotly(p)
 The results for the average return suggest a decreasing trend in the daily and monthly returns of BTC with a decrease on the volatility, by extrapolating these results we expect a decrease in the returns before the next halving and also a decrease in volatility which it is expected to occur closer to the halving. 
 
 
+## Bonus
+
+Historical data for BTC in which we can evaluate the range of data of the halving periods to see the daily movements on the market. 
+
+```{r}
+BTC <- na.omit(btc)
+
+BTC <- column_to_rownames(BTC, "Date")
+BTC <- BTC[,c(1:4)]
+BTC <- as.xts(BTC)
+
+p <- dygraph(BTC, xlab = "Date", ylab = "Price", main = "BTC Price") %>%
+  dySeries("Open", label = "Open", color = "black") %>%
+  dySeries("Low", label = "Low", color = "red") %>%
+  dySeries("High", label = "High", color = "green") %>%
+  dySeries("Close", label = "Close", color = "orange") %>%
+  dyRangeSelector() %>%
+  dyCandlestick()%>%
+  dyCrosshair(direction = "vertical") %>%
+  dyHighlight(highlightCircleSize = 3, highlightSeriesBackgroundAlpha = 0.2, hideOnMouseOut = T)  %>%
+  dyRoller(rollPeriod = 1)
+p
+
+```
+
+
+
+
 Github: https://github.com/sotoblanco/BTC-HalvingPredictions
 
 
-Email: sotoblanco263542@gmail.com
+Email: sotoblancop26@gmail.com
 
 
 Twitter: @PastorSotoB1
